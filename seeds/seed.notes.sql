@@ -1,5 +1,5 @@
 INSERT INTO notes
-    (note_name, content, folder_id)
+    (name, content, folder_id)
     VALUES
     ('Note One', 'Lorem Ipsum', 1),
     ('Note Two', 'BLah Blah Blah', 1),

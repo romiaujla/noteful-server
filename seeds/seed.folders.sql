@@ -1,5 +1,5 @@
 INSERT INTO folders
-    (title)
+    (name)
     VALUES
     ('Important'),
     ('Second Folder'),
