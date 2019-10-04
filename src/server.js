@@ -8,6 +8,8 @@ const db = knex({
     connection: DB_URL
 });
 
+app.set('db', db);
+
 app.use((error, req, res, next) => {
     let response = {};
     if(NODE_ENV === 'production'){
