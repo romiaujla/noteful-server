@@ -8,6 +8,12 @@ const FolderServices = {
         return db(NOTES_TABLE)
             .where('folder_id', folder_id);
     },
+    addNewFolder(db, newFolder){
+        return db(FOLDERS_TABLE)
+            .insert(newFolder)
+            .returning('*')
+            .then((rows) => rows[0]);
+    }
 }
 
 module.exports = FolderServices;
