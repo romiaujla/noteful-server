@@ -12,6 +12,19 @@ folderRouter
                 res.json(folders);
             })
             .catch(next);
+    })
+    .post(bodyParser, (req, res, next) => {
+        const db = req.app.get('db');
+        const newFolder = {
+            name: req.body.name
+        }
+        FolderServices.addNewFolder(db, newFolder)
+            .then((addedFolder) => {
+                res
+                    .status(201)
+                    .send(addedFolder);
+            })
+            .catch(next);
     });
     
 folderRouter
