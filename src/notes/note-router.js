@@ -13,6 +13,23 @@ noteRouter
             })
             .catch(next);
     })
+    .post(bodyParser, (req, res, next)=>{
+        const db = req.app.get('db');
+        const { name, content, folder_id } = req.body;
+        const newNote = {
+            name,
+            content,
+            folder_id
+        }
+        NotesServices.addNewNote(db, newNote)
+            .then((addedNote) => {
+                res
+                    .status(201)
+                    .send(addedNote);
+            })
+            .catch(next);
+
+    })
 
 noteRouter
     .route('/:id')
