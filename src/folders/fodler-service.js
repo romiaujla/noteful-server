@@ -5,7 +5,9 @@ const FolderServices = {
         return db(FOLDERS_TABLE);
     },
     getNotesByFolderId(db, folder_id){
-        
+        return db(NOTES_TABLE)
+            .where('folder_id', folder_id)
+            .first();
     },
 }
 
