@@ -11,6 +11,7 @@ const db = knex({
 app.set('db', db);
 
 app.use((error, req, res, next) => {
+    console.log(error);
     let response = {};
     if(NODE_ENV === 'production'){
         response = {
