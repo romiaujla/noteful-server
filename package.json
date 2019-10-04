@@ -4,9 +4,11 @@
   "description": "This is a boilerplate project used for starting new projects!",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
+    "test": "mocha --require test/setup.js --watch",
     "start": "node ./src/server",
     "dev": "nodemon ./src/server",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:test": "env NODE_ENV=test npm run",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
   },
