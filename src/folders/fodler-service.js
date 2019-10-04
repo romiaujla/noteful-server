@@ -1,4 +1,4 @@
-const FOLDERS_TABLE = 'fodlers';
+const FOLDERS_TABLE = 'folders';
 const NOTES_TABLE = 'notes';
 const FolderServices = {
     getAllFolders(db){
