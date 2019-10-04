@@ -1,5 +1,12 @@
 const app = require('./app');
-const {PORT, NODE_ENV} = require('./config');
+const {PORT, NODE_ENV, DB_URL} = require('./config');
+
+// Creating the knex instance
+const knex = require('knex');
+const db = knex({
+    client: 'pg',
+    connection: DB_URL
+});
 
 app.use((error, req, res, next) => {
     let response = {};
