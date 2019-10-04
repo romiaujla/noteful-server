@@ -12,6 +12,18 @@ folderRouter
                 res.json(folders);
             })
             .catch(next);
-    })
+    });
     
+folderRouter
+    .route('/:id')
+    .get((req, res, next) => {
+        const db = req.app.get('db');
+        const { id } = req.params;
+        FolderServices.getNotesByFolderId(db, id)
+            .then((notes) => {
+                res.json(notes);
+            })
+            .catch(next);
+    });
+
 module.exports = folderRouter;
