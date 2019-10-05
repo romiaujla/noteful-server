@@ -8,10 +8,10 @@ const folderRouter = require('./folders/folder-router');
 const noteRouter = require('./notes/note-router');
 
 const app = express();
-const morganOptions = NODE_ENV === 'production' 
-    ? 'tiny' 
-    : 'common';
-app.use(morgan(morganOptions));
+	
+// app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
+//     skip: () => NODE_ENV === 'test'
+//   }));
 app.use(helmet());
 app.use(cors());
 
