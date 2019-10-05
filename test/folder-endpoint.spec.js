@@ -58,23 +58,19 @@ describe(`\n\nFOLDER ENDPOINTS`, ()=>{
                     })
             })
         });
-
-        context(`Given there is data in folders and notes table`, ()=>{
-            beforeEach(`Insert data into folders table`, ()=>{
-                return db(FOLDER_TABLE)
-                    .insert(testFolders);
-            });
-            beforeEach(`Insert data into notes table`, ()=>{
-                return db(NOTES_TABLE)
-                    .insert(testNotes);
-            });
-        }); 
-
     });
 
     describe(`/folders/:id ENDPOINT`, ()=>{
         context(`Given no data in folders table`, ()=>{
-
+            it(`GET /folders/:id - resovles with 404`, ()=>{
+                return request(app)
+                    .get('/folders')
+                    .expect(404, {
+                        error: {
+                            message: `Folder does not exist`
+                        }
+                    })
+            })
         });
 
         context(`Given there is data in folders and no data in notes table`, ()=>{
