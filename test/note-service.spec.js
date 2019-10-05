@@ -120,6 +120,5 @@ describe(`\n\nNOTES SERVICE TESTS`, ()=>{
                     expect(note).to.deep.eql(undefined);
                 })
         });
-
-    })
+    });
 });
