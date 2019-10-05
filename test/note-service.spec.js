@@ -64,6 +64,15 @@ describe(`\n\nNOTES SERVICE TESTS`, ()=>{
                         });
                 })
         });
+
+        it(`getById() - gets the correct note`, ()=>{
+            const id = 4;
+            const expectedNote = testNotes[id-1];
+            return NotesService.getNotesById(db, id)
+                .then((note) => {
+                    expect(note).to.deep.eql(expectedNote);
+                })
+        })
     });
 
     context(`Given notes table has NO data`, ()=>{
@@ -102,6 +111,14 @@ describe(`\n\nNOTES SERVICE TESTS`, ()=>{
                         modified: newNote.modified
                     });
                 });
+        });
+
+        it(`getById() - returns undefined`, ()=>{
+            const id = 4;
+            return NotesService.getNotesById(db, id)
+                .then((note) => {
+                    expect(note).to.deep.eql(undefined);
+                })
         });
 
     })
