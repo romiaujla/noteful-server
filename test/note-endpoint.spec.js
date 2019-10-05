@@ -114,8 +114,8 @@ describe(`\n\nNOTES ENDPOINTS`, ()=>{
                             message: `Requested Note could not be found`
                         }
                     })
-            })
-            
+            });
+
         });
 
         context(`Given notes has data`, ()=>{
@@ -129,6 +129,32 @@ describe(`\n\nNOTES ENDPOINTS`, ()=>{
                 return db(NOTES_TABLE)
                     .insert(testNotes);
             });
+
+            it(`GET /notes/:id - resolve and return the correct note`, ()=>{
+                const id = 3;
+                const expectedNote = testNotes[id-1];
+                return request(app)
+                    .get(`/notes/${id}`)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.body).to.deep.eql(expectedNote);
+                    })
+            });
+
+            it(`DELETE /notes/:id - resolve with 204 and delete the correct note`, ()=>{
+                const id = 3;
+                const expectedNotesArray = testNotes.filter(note => note.id !== id);
+                return request(app)
+                    .delete(`/notes/${id}`)
+                    .then((res) => {
+                        return request(app)
+                            .get('/notes')
+                            .expect(200)
+                            .then((res) => {
+                                expect(res.body).to.deep.eql(expectedNotesArray);
+                            })
+                    })
+            })
 
         });
 
