@@ -1,7 +1,5 @@
 require('dotenv').config();
 const FolderService = require('../src/folders/fodler-service');
-const FOLDER_TABLE = 'folders';
-const NOTES_TABLE = 'notes';
 const knex = require('knex');
 const app = require('../src/app');
 const { makeFoldersArray } = require('./fixtures/folders-fixtures');
@@ -12,6 +10,8 @@ describe(`\n\nFOLDERS SERVICE TESTS`, ()=>{
     let db = '';
     let testFolders = makeFoldersArray();
     let testNotes = makeNotesArrayForServices();
+    const FOLDER_TABLE = 'folders';
+    const NOTES_TABLE = 'notes';
 
     before(`Create knex instance`, ()=>{
         db = knex({
