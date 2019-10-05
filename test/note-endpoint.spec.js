@@ -84,6 +84,14 @@ describe(`\n\nNOTES ENDPOINTS`, ()=>{
                     .insert(testNotes);
             });
 
+            it(`GET /notes - returns all the notes`, ()=>{
+                return request(app)
+                    .get('/notes')
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.body).to.deep.eql(testNotes);
+                    });
+            })
         });
 
     });
@@ -96,6 +104,17 @@ describe(`\n\nNOTES ENDPOINTS`, ()=>{
                 return db(FOLDERS_TABLE)
                     .insert(testFolders);
             });
+
+            it(`GET /notes/:id - should return 404 and not found message`, ()=>{
+                const id = 1234;
+                return request(app)
+                    .get(`/notes/${id}`)
+                    .expect(404, {
+                        error: {
+                            message: `Requested Note could not be found`
+                        }
+                    })
+            })
             
         });
 
