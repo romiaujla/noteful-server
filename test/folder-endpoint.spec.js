@@ -42,6 +42,21 @@ describe(`\n\nFOLDER ENDPOINTS`, ()=>{
                         expect(res.body).to.eql([]);
                     })
             })
+            it(`POST /folders - resolves and adds a folders with an id`, ()=>{
+                const newFolder = {
+                    name: 'Test Folder'
+                }
+                return request(app)
+                    .post('/folders')
+                    .send(newFolder)
+                    .expect(201)
+                    .then((res) => {
+                        expect(res.body).to.eql({
+                            id: 1,
+                            name: newFolder.name
+                        });
+                    })
+            })
         });
 
         context(`Given there is data in folders and no data in notes table`, ()=>{
@@ -56,27 +71,26 @@ describe(`\n\nFOLDER ENDPOINTS`, ()=>{
                     .then((res)=>{
                         expect(res.body).to.deep.eql(testFolders);
                     })
-            })
+            });
         });
     });
 
     describe(`/folders/:id ENDPOINT`, ()=>{
-        context(`Given no data in folders table`, ()=>{
-            it(`GET /folders/:id - resovles with 404`, ()=>{
-                return request(app)
-                    .get('/folders')
-                    .expect(404, {
-                        error: {
-                            message: `Folder does not exist`
-                        }
-                    })
-            })
-        });
 
         context(`Given there is data in folders and no data in notes table`, ()=>{
             beforeEach(`Insert data into folders table`, ()=>{
                 return db(FOLDER_TABLE)
                     .insert(testFolders);
+            });
+
+            it(`GET /folders/:id - resolves and returns empty notes array`, () => {
+                const id = 2;
+                return request(app)
+                    .get(`/folders/${id}`)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.body).to.eql([]);
+                    })
             });
         });
 
