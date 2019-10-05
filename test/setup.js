@@ -1,3 +1,4 @@
+process.env.TZ = 'UTC';
 const {expect} = require('chai');
 const request = require('supertest');
 

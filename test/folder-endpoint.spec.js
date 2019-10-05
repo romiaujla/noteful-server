@@ -103,6 +103,17 @@ describe(`\n\nFOLDER ENDPOINTS`, ()=>{
                 return db(NOTES_TABLE)
                     .insert(testNotes);
             });
+
+            it(`GET /folders/:id - resolves and return all notes in folder`, ()=>{
+                const id = 1;
+                const expectedNotes = testNotes.filter(note => note.folder_id === id);
+                return request(app)
+                    .get(`/folders/${id}`)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.body).to.deep.eql(expectedNotes);
+                    })
+            });
         }); 
     })
 
