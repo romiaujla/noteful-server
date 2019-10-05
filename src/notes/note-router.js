@@ -38,6 +38,15 @@ noteRouter
         const { id } = req.params;
         NotesServices.getNotesById(db, id)
             .then((note) => {
+                if(!note){
+                    res
+                        .status(404)
+                        .json({
+                            error: {
+                                message: `Requested Note could not be found`
+                            }
+                        })
+                }
                 res.json(note);
             })
             .catch(next);
